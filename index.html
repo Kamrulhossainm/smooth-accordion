@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+        h2{
+            font-size: 60px;
+            text-align: center;
+        }
+
+        /* main css  */
+        .chip-faq {
+            width: 600px;
+            margin: 0 auto;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+        .arrow{
+            float: right;
+            transition: transform 0.3s ease;
+        }
+        .rotate-down{
+            transform: rotate(90deg);
+        }
+        .faq-item {
+            margin-top: 20px;
+        }
+        .title{
+            cursor: pointer;
+        }
+        .content{
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+    </style>
+</head>
+<body>
+    <h2>Accordion Item with Smooth</h2>
+    <div class="chip-faq">
+        
+        <div class="faq-item">
+            <div class="title">Nutrition Facts <span class="arrow">&#x203A;</span></div>
+            <div class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolor, possimus veritatis culpa natus quis blanditiis illum similique expedita porro quia eveniet, modi consectetur doloremque autem officia? Dolor, cumque impedit?</div>
+        </div>
+        <div class="faq-item">
+            <div class="title">Nutrition Facts <span class="arrow">&#x203A;</span></div>
+            <div class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque maxime perferendis blanditiis error quia at doloremque cupiditate rerum. Ex a eum iste necessitatibus quo reprehenderit, sequi quibusdam perferendis laudantium ipsam.</div>
+        </div>
+        <div class="faq-item">
+            <div class="title">Nutrition Facts <span class="arrow">&#x203A;</span></div>
+            <div class="content">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Neque, soluta? Ullam deleniti blanditiis, eius, aliquid eos natus itaque enim libero omnis nulla optio tenetur aliquam mollitia et alias quod. Voluptate dolor nam quod voluptas facere modi quam temporibus provident aliquam ducimus impedit iusto voluptatibus, exercitationem explicabo? Consequatur, mollitia? Quae, adipisci!</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(function(item) {
+                const title = item.querySelector('.title');
+                const content = item.querySelector('.content');
+
+                title.addEventListener('click', function() {
+                    // Close all accordion
+                    faqItems.forEach(function(otherItem) {
+                        const otherContent = otherItem.querySelector('.content');
+                        if(otherContent != content) {
+                            otherContent.style.maxHeight = null;
+                            otherItem.querySelector('.arrow').classList.remove('rotate-down');
+                        }
+                    });
+
+                    // toggle the clicked accordion
+                    content.style.maxHeight = content.style.maxHeight ? null : content.scrollHeight + 'px';
+                    title.querySelector('.arrow').classList.toggle('rotate-down');
+                })
+            })
+        })
+    </script>
+</body>
+</html>
